@@ -3,60 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SumDoku Fusion</title>
+    <title>JLPT 漢字 Dialogue Lab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Sora:wght@400;600;700&family=SUIT:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="bg-noise" aria-hidden="true"></div>
-    <main class="app">
+    <div class="bg-layer" aria-hidden="true"></div>
+    <main class="layout">
       <header class="hero">
-        <p class="eyebrow">Sudoku + Kakuro Hybrid</p>
-        <h1>SumDoku Fusion</h1>
+        <p class="eyebrow">JLPT N1 / N2</p>
+        <h1>漢字 Dialogue Lab</h1>
         <p class="subtitle">
-          6x6 스도쿠 규칙 + 케이지 합 규칙을 동시에 만족시키는 퍼즐
+          상급 한자가 포함된 일본어 대화문을 읽고, 후리가나·번역·한자 풀이를 동시에 학습하세요.
         </p>
       </header>
 
-      <section class="game-shell">
-        <div class="board-wrap">
-          <div class="board" id="board" role="grid" aria-label="SumDoku board"></div>
-          <div class="legend" id="legend"></div>
-        </div>
+      <section class="workspace">
+        <section class="conversation-panel card">
+          <div class="toolbar">
+            <div class="level-filter" id="levelFilter">
+              <button type="button" data-level="ALL" class="active">전체</button>
+              <button type="button" data-level="N2">N2</button>
+              <button type="button" data-level="N1">N1</button>
+            </div>
+            <input
+              id="searchInput"
+              class="search-box"
+              type="text"
+              placeholder="한자/단어 검색 (예: 施策, 検証)"
+              aria-label="대화 검색"
+            />
+            <button type="button" id="shuffleBtn" class="ghost-btn">랜덤 대화</button>
+          </div>
 
-        <aside class="panel">
-          <div class="selection" id="selectionInfo">선택된 칸: 없음</div>
-          <div class="num-pad" id="numPad">
-            <button type="button" data-value="1">1</button>
-            <button type="button" data-value="2">2</button>
-            <button type="button" data-value="3">3</button>
-            <button type="button" data-value="4">4</button>
-            <button type="button" data-value="5">5</button>
-            <button type="button" data-value="6">6</button>
+          <div class="toggle-row">
+            <label><input type="checkbox" id="furiganaToggle" checked /> 후리가나 표시</label>
+            <label><input type="checkbox" id="translationToggle" checked /> 한국어 번역 표시</label>
           </div>
-          <div class="actions">
-            <button type="button" id="btnClear">지우기</button>
-            <button type="button" id="btnCheck">검사</button>
-            <button type="button" id="btnHint">힌트</button>
-            <button type="button" id="btnReset">초기화</button>
-            <button type="button" id="btnSolve">정답 보기</button>
-          </div>
-          <div class="status" id="status">퍼즐을 시작하세요.</div>
-          <div class="rules">
-            <h2>규칙</h2>
-            <p>1) 각 행/열에 1~6이 중복 없이 한 번씩 등장해야 합니다.</p>
-            <p>2) 각 2x3 박스도 1~6이 중복 없이 등장해야 합니다.</p>
-            <p>3) 같은 케이지 숫자 합은 타깃과 같아야 하며, 중복은 불가합니다.</p>
-          </div>
+
+          <div class="scene-list" id="sceneList"></div>
+        </section>
+
+        <aside class="study-panel">
+          <section class="card stat-card">
+            <h2>학습 현황</h2>
+            <p id="statSummary">데이터 로드 중...</p>
+            <div class="meter">
+              <div class="meter-fill" id="meterFill"></div>
+            </div>
+          </section>
+
+          <section class="card kanji-card">
+            <div class="card-head">
+              <h2>핵심 한자 사전</h2>
+              <span id="kanjiCount">0개</span>
+            </div>
+            <div class="kanji-list" id="kanjiList"></div>
+          </section>
+
+          <section class="card quiz-card">
+            <div class="card-head">
+              <h2>미니 퀴즈</h2>
+              <button type="button" id="newQuizBtn" class="ghost-btn">새 문제</button>
+            </div>
+            <p class="quiz-question" id="quizQuestion">문제를 생성 중입니다...</p>
+            <div class="quiz-options" id="quizOptions"></div>
+            <p class="quiz-feedback" id="quizFeedback"></p>
+          </section>
         </aside>
       </section>
     </main>
-
     <script src="./app.js" type="module"></script>
   </body>
 </html>
