@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SumDoku Fusion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-noise" aria-hidden="true"></div>
+    <main class="app">
+      <header class="hero">
+        <p class="eyebrow">Sudoku + Kakuro Hybrid</p>
+        <h1>SumDoku Fusion</h1>
+        <p class="subtitle">
+          6x6 스도쿠 규칙 + 케이지 합 규칙을 동시에 만족시키는 퍼즐
+        </p>
+      </header>
+
+      <section class="game-shell">
+        <div class="board-wrap">
+          <div class="board" id="board" role="grid" aria-label="SumDoku board"></div>
+          <div class="legend" id="legend"></div>
+        </div>
+
+        <aside class="panel">
+          <div class="selection" id="selectionInfo">선택된 칸: 없음</div>
+          <div class="num-pad" id="numPad">
+            <button type="button" data-value="1">1</button>
+            <button type="button" data-value="2">2</button>
+            <button type="button" data-value="3">3</button>
+            <button type="button" data-value="4">4</button>
+            <button type="button" data-value="5">5</button>
+            <button type="button" data-value="6">6</button>
+          </div>
+          <div class="actions">
+            <button type="button" id="btnClear">지우기</button>
+            <button type="button" id="btnCheck">검사</button>
+            <button type="button" id="btnHint">힌트</button>
+            <button type="button" id="btnReset">초기화</button>
+            <button type="button" id="btnSolve">정답 보기</button>
+          </div>
+          <div class="status" id="status">퍼즐을 시작하세요.</div>
+          <div class="rules">
+            <h2>규칙</h2>
+            <p>1) 각 행/열에 1~6이 중복 없이 한 번씩 등장해야 합니다.</p>
+            <p>2) 각 2x3 박스도 1~6이 중복 없이 등장해야 합니다.</p>
+            <p>3) 같은 케이지 숫자 합은 타깃과 같아야 하며, 중복은 불가합니다.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
